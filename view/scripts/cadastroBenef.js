@@ -26,16 +26,17 @@ function salvarBenef(localizacao) {
       nome_responsavel: nomeResp.value,
       data_nascimento: document.getElementById("dtNascimento").value,
       phone1: phone1.value,
-      phone2: phone1.value,
+      phone2: phone2.value,
       location: localizacao,
     };
   
     const method = uuid ? "PATCH" : "POST";
     const url = uuid ? `${URL}/${uuid}` : URL;
+    const token = localStorage.getItem("token");
   
     fetch(url, {
       method,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json","Authorization": `Bearer ${token}`},
       body: JSON.stringify(beneficiario),
     })
       .then((res) => {

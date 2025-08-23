@@ -6,7 +6,6 @@ const modal = document.createElement("div");
 modal.id = "modal-mapa";
 modal.style.display = "block";
 
-
 const closeBtn = document.createElement("button");
 closeBtn.textContent = "Fechar";
 
@@ -26,6 +25,7 @@ document.body.appendChild(modal);
 
 let mapa;
 
+// 🔎 Filtro por nome/distância
 document.getElementById("btnFiltrar").addEventListener("click", () => {
   const nome = document.getElementById("filtroNome").value.trim();
   const distancia = document.getElementById("filtroDistancia").value.trim();
@@ -61,6 +61,7 @@ document.getElementById("btnFiltrar").addEventListener("click", () => {
   );
 });
 
+// 📋 Renderizar tabela
 function renderTabela(benefs) {
   tabelaBody.replaceChildren(); 
 
@@ -93,11 +94,11 @@ function renderTabela(benefs) {
     const tdAcoes = document.createElement("td");
     const btEdit = document.createElement("button");
     btEdit.textContent = "Editar";
-    btEdit.onclick = () => editarBenef(benef.uuid);
+    btEdit.onclick = () => editarBenef(benef._id);
 
     const btDelete = document.createElement("button");
     btDelete.textContent = "Excluir";
-    btDelete.onclick = () => excluirBenef(benef.uuid);
+    btDelete.onclick = () => excluirBenef(benef._id);
 
     tdAcoes.appendChild(btEdit);
     tdAcoes.appendChild(btDelete);
@@ -107,6 +108,7 @@ function renderTabela(benefs) {
   });
 }
 
+// 📥 Carregar todos beneficiários
 async function carregarBeneficiarios() {
   try {
     const res = await fetch(URL);
@@ -143,11 +145,11 @@ async function carregarBeneficiarios() {
       const tdAcoes = document.createElement("td");
       const btEdit = document.createElement("button");
       btEdit.textContent = "Editar";
-      btEdit.onclick = () => editarBenef(benef.uuid);
+      btEdit.onclick = () => editarBenef(benef._id);
 
       const btDelete = document.createElement("button");
       btDelete.textContent = "Excluir";
-      btDelete.onclick = () => excluirBenef(benef.uuid);
+      btDelete.onclick = () => excluirBenef(benef._id);
 
       tdAcoes.appendChild(btEdit);
       tdAcoes.appendChild(btDelete);
@@ -160,11 +162,13 @@ async function carregarBeneficiarios() {
   }
 }
 
+// 📅 Formatar data
 function formatarData(dataISO) {
   const data = new Date(dataISO);
   return data.toLocaleDateString("pt-BR");
 }
 
+// ✏️ Editar beneficiário (não precisa de token)
 function editarBenef(id) {
   fetch(`${URL}/${id}`)
     .then(res => res.json())
@@ -178,13 +182,17 @@ function editarBenef(id) {
     });
 }
 
+// 🗑️ Excluir beneficiário (precisa de token)
 async function excluirBenef(id) {
   const confirmado = confirm("Tem certeza que deseja excluir?");
   if (!confirmado) return;
 
+  const token = localStorage.getItem("token");
+
   try {
     const res = await fetch(`${URL}/${id}`, {
       method: "DELETE",
+      headers: { "Authorization": `Bearer ${token}` }
     });
 
     if (res.ok) {
@@ -198,6 +206,7 @@ async function excluirBenef(id) {
   }
 }
 
+// 🗺️ Exibir no mapa
 function exibirMapa(location) {
   if (!location || !location.coordinates) {
     alert("Localização não disponível");
@@ -221,19 +230,5 @@ function exibirMapa(location) {
   }, 100); 
 }
 
-const tdAcoes = document.createElement("td");
-
-const btEdit = document.createElement("button");
-btEdit.textContent = "✏️ Editar";
-btEdit.classList.add("btn-edit");
-btEdit.onclick = () => editarBenef(benef.uuid);
-
-const btDelete = document.createElement("button");
-btDelete.textContent = "🗑️ Excluir";
-btDelete.classList.add("btn-delete");
-btDelete.onclick = () => excluirBenef(benef.uuid);
-
-tdAcoes.appendChild(btEdit);
-tdAcoes.appendChild(btDelete);
-
+// 🚀 Inicializar tabela
 carregarBeneficiarios();
