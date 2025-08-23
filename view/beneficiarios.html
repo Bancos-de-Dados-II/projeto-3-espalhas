@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Beneficiários</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="benefsPage.css">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script 
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin="" 
+  ></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Beneficiários Cadastrados</h1>
+
+    <div class="filtro-container">
+      <label for="filtroNome">Nome:</label>
+      <input type="text" id="filtroNome" placeholder="Digite o nome">
+
+      <label for="filtroDistancia">Distância (km):</label>
+      <input type="number" id="filtroDistancia" placeholder="Ex: 5">
+
+      <button id="btnFiltrar">Filtrar</button>
+    </div>
+
+
+    <div class="table-container">
+  <table id="tabela-beneficiarios">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Responsável</th>
+        <th>Data de Nascimento</th>
+        <th>Telefone 1</th>
+        <th>Telefone 2</th>
+        <th>Localização</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+    <div>
+      <button id="botaoLink"><a href="index.html">Cadastrar Beneficiário</a></button>
+    </div>
+  </div>
+
+  <script src="./scripts/viewBenefs.js"></script>
+</body>
+</html>
