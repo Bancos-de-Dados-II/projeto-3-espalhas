@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document, Model, Types } from 'mongoose';
 
 export interface IAssistenteSocial extends Document {
+  _id: Types.ObjectId;
   nome: string;
   email: string;
   password?: string;

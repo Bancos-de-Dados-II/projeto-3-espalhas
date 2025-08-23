@@ -1,10 +1,21 @@
 import { AssistenteSocial, IAssistenteSocial } from './../models/AssistenteSocial.model';
+import Neo4jService from "./neo4j.service";
 import { Types } from 'mongoose';
 
 export default class AssistenteSocialService {
   static async createAssistenteSocial(data: Partial<IAssistenteSocial>): Promise<IAssistenteSocial> {
-    const assistente = new AssistenteSocial(data);
-    return assistente.save();
+    const assistente = await AssistenteSocial.create(data);
+    try {
+      await Neo4jService.createAssistenteSocial(
+        assistente._id.toString(),
+        assistente.adminId.toString(),
+        { nome: assistente.nome, email: assistente.email, telefone: assistente.telefone }
+      );
+    } catch (err) {
+      console.error("⚠️ Erro ao sincronizar com Neo4j:", err);
+    }
+
+    return assistente;
   }
 
   static async getAllAssistentes(): Promise<{ total: number, assistentes: IAssistenteSocial[] }> {
