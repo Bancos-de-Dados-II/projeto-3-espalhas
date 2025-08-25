@@ -43,3 +43,10 @@ function mostrarErro(mensagem) {
 btnFechar.addEventListener("click", () => {
   modalErro.style.display = "none";
 });
+
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('toggle-pass')) {
+    const input = document.getElementById('password');
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+});
