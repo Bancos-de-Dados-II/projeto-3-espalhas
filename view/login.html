@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Login</title>
+</head>
+<body>
+  <main class="auth">
+    <form id="form-login" class="card">
+      <h2>Entrar</h2>
+
+      <div class="field">
+        <label for="email">E-mail</label>
+        <div class="input-wrap">
+          <input type="email" id="email" placeholder="voce@email.com" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="password">Senha</label>
+        <div class="input-wrap">
+          <input type="password" id="password" placeholder="Sua senha" required>
+          <button type="button" class="toggle-pass" aria-label="Mostrar/ocultar senha">👁️</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <label class="remember">
+          <input type="checkbox" id="remember">
+          Lembrar-me
+        </label>
+        <a href="#" class="link">Esqueci minha senha</a>
+      </div>
+
+      <button type="submit" class="btn-primary">Entrar</button>
+    </form>
+  </main>
+
+  <div id="modal-erro">
+    <div class="conteudo">
+      <p id="mensagem-erro"></p>
+      <button id="btn-fechar">Fechar</button>
+    </div>
+  </div>
+  <script src="scripts/login.js"></script>
+</body>
+</html>
