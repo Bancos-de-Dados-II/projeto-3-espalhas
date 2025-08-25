@@ -1,13 +1,13 @@
 :root{
-  --bg1:#3498db;
-  --bg2:#2ecc71;
+  --bg1:#112b3c;
+  --bg2:#0c321b;
   --text:#333;
   --muted:#555;
-  --border:#dcdcdc;
-  --primary:#4caf50;   
-  --primary-hover:#45a049;
-  --danger:#e74c3c;
-  --danger-hover:#c0392b;
+  --border:#f3aaaa;
+  --primary:#0d4c0f;   
+  --primary-hover:#2e3c2e;
+  --danger:#69322c;
+  --danger-hover:#482a26;
 }
 
 html,body{
@@ -113,7 +113,7 @@ body{
 
 .btn-primary{
   background: var(--primary);
-  color:#fff;
+  color:#ffffffe7;
   border:none;
   height:44px;
   border-radius:10px;

@@ -149,6 +149,18 @@ li button {
   cursor: pointer;
 }
 
+#botaoLink2 {
+  margin: 10px 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 #botaoLink:hover {
   background-color: #0056b3;
 }
