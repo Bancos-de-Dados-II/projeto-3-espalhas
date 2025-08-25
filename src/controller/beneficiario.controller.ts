@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import BeneficiarioService from '../service/beneficiario.service';
 import { Beneficiario } from '../models/Beneficiario.model';
+import mongoose from 'mongoose';
 
 export default class BeneficiarioController {
     static async getBenefs(req: Request, res: Response) {
@@ -125,8 +126,8 @@ export default class BeneficiarioController {
     static async editBenef(req: Request, res: Response) {
         const { id } = req.params;
 
-        if (!id) {
-            res.status(400).json('O ID do beneficiário não foi identificado.');
+        if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400).json('ID do beneficiário inválido.');
         }
         const authenticatedReq = req as any;
         if (!authenticatedReq.userId || !authenticatedReq.userType) {

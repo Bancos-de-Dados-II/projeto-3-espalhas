@@ -44,5 +44,6 @@ export default class BeneficiarioService {
 
     static async deleteBenefById(id: string) {
         await Beneficiario.findByIdAndDelete(id).exec();
+        await Neo4jService.deleteBeneficiario(id);
     }
 }

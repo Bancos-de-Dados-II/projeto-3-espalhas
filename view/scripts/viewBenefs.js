@@ -168,18 +168,24 @@ function formatarData(dataISO) {
   return data.toLocaleDateString("pt-BR");
 }
 
-// ✏️ Editar beneficiário (não precisa de token)
-function editarBenef(id) {
-  fetch(`${URL}/${id}`)
-    .then(res => res.json())
-    .then(benef => {
-      localStorage.setItem("beneficiarioEdit", JSON.stringify(benef));
-      window.location.href = "index.html";
-    })
-    .catch(err => {
-      console.error("Erro ao buscar beneficiário:", err);
-      alert("Erro ao carregar beneficiário.");
-    });
+function editarBenef(id, dadosAtualizados) {
+  fetch(`${URL}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    },
+    body: JSON.stringify(dadosAtualizados)
+  })
+  .then(res => res.json())
+  .then(benef => {
+    localStorage.setItem("beneficiarioEdit", JSON.stringify(benef));
+    window.location.href = "index.html";
+  })
+  .catch(err => {
+    console.error("Erro ao buscar beneficiário:", err);
+    alert("Erro ao carregar beneficiário.");
+  });
 }
 
 // 🗑️ Excluir beneficiário (precisa de token)

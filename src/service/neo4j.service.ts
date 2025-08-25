@@ -25,6 +25,24 @@ export default class Neo4jService {
       await session.close();
     }
   }
+  
+  static async deleteAssistenteSocial(assistenteId: string) {
+    const session = driver.session();
+    try {
+        await session.run(
+            `
+            MATCH (s:AssistenteSocial {mongoId: $assistenteId})
+            DETACH DELETE s
+            `,
+            { assistenteId }
+        );
+        console.log(`🗑️ Assistente social removido do Neo4j: ${assistenteId}`);
+    } catch (err) {
+        console.error("⚠️ Erro ao deletar assistente social  no Neo4j:", err);
+    } finally {
+        await session.close();
+    }
+  }
 
   static async createBeneficiario(
         benefId: string,
@@ -50,6 +68,24 @@ export default class Neo4jService {
         } finally {
         await session.close();
         }
+    }
+
+    static async deleteBeneficiario(benefId: string) {
+      const session = driver.session();
+      try {
+          await session.run(
+              `
+              MATCH (b:Beneficiario {mongoId: $benefId})
+              DETACH DELETE b
+              `,
+              { benefId }
+          );
+          console.log(`🗑️ Beneficiário removido do Neo4j: ${benefId}`);
+      } catch (err) {
+          console.error("⚠️ Erro ao deletar Beneficiário no Neo4j:", err);
+      } finally {
+          await session.close();
+      }
     }
 
   static async deleteNode(label: string, mongoId: string) {
