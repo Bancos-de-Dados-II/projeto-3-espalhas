@@ -25,10 +25,8 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    // Salvar token
     localStorage.setItem("token", data.token);
 
-    // Redireciona para a página de cadastro (index.html)
     window.location.href = "index.html";
 
   } catch (err) {

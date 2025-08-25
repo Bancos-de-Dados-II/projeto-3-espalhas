@@ -24,8 +24,6 @@ modal.appendChild(mapaDiv);
 document.body.appendChild(modal);
 
 let mapa;
-
-// 🔎 Filtro por nome/distância
 document.getElementById("btnFiltrar").addEventListener("click", () => {
   const nome = document.getElementById("filtroNome").value.trim();
   const distancia = document.getElementById("filtroDistancia").value.trim();
@@ -61,7 +59,6 @@ document.getElementById("btnFiltrar").addEventListener("click", () => {
   );
 });
 
-// 📋 Renderizar tabela
 function renderTabela(benefs) {
   tabelaBody.replaceChildren(); 
 
@@ -108,7 +105,6 @@ function renderTabela(benefs) {
   });
 }
 
-// 📥 Carregar todos beneficiários
 async function carregarBeneficiarios() {
   try {
     const res = await fetch(URL);
@@ -162,7 +158,6 @@ async function carregarBeneficiarios() {
   }
 }
 
-// 📅 Formatar data
 function formatarData(dataISO) {
   const data = new Date(dataISO);
   return data.toLocaleDateString("pt-BR");
@@ -188,7 +183,6 @@ function editarBenef(id, dadosAtualizados) {
   });
 }
 
-// 🗑️ Excluir beneficiário (precisa de token)
 async function excluirBenef(id) {
   const confirmado = confirm("Tem certeza que deseja excluir?");
   if (!confirmado) return;
@@ -212,7 +206,6 @@ async function excluirBenef(id) {
   }
 }
 
-// 🗺️ Exibir no mapa
 function exibirMapa(location) {
   if (!location || !location.coordinates) {
     alert("Localização não disponível");
@@ -236,5 +229,4 @@ function exibirMapa(location) {
   }, 100); 
 }
 
-// 🚀 Inicializar tabela
 carregarBeneficiarios();
